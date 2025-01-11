@@ -21,6 +21,7 @@ public class AuthController {
         return modelAndView;
     }
 
+
     @PostMapping("/login")
     public String login(@ModelAttribute UserEntity user) {
         Optional<UserEntity> foundUser = userRepository.findByUsername(user.getUsername());
