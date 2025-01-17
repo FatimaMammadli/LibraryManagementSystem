@@ -1,32 +1,19 @@
 package com.example.LibraryManagementSystem.controller;
 
-import com.example.LibraryManagementSystem.model.UserEntity;
-import com.example.LibraryManagementSystem.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import ch.qos.logback.core.model.Model;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Optional;
-
-@RestController
-@RequestMapping("/auth")
+@Controller
 public class AuthController {
 
-    @Autowired
-    private UserRepository userRepository;
     @GetMapping("/login")
-    public ModelAndView loginPage() {
-        ModelAndView modelAndView = new ModelAndView("login");
-        modelAndView.addObject("user", new UserEntity());
-        return modelAndView;
+    public String loginPage(Model model) {
+        return "auth/login"; // Renders the login page (templates/auth/login.html)
     }
 
-
-
-    @PostMapping("/login")
-    public String login(@ModelAttribute UserEntity user) {
-        Optional<UserEntity> foundUser = userRepository.findByUsername(user.getUsername());
-
-        return "Invalid credentials";
+    @GetMapping("/dashboard")
+    public String dashboard() {
+        return "dashboard"; // Renders the dashboard page (templates/dashboard.html)
     }
 }

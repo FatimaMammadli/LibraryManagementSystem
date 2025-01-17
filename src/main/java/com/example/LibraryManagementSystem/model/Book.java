@@ -8,15 +8,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "author")
+@Table(name = "book")
 @Getter
 @Setter
-public class Author {
-
+public class Book {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long id;
-    @ManyToMany(mappedBy = "authors")
-    private List<Book> books = new ArrayList<>();
     private String name;
+    @ManyToMany
+    @JoinTable
+    private List<Author> authors=new ArrayList<>();
+    private String publisher;
+    private int publishedYear;
+    private int quantity;
+
 }
