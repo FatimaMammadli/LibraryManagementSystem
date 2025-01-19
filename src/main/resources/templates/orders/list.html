@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order List</title>
+</head>
+<body>
+<h2>Orders</h2>
+<a href="/orders/create">Create New Order</a>
+<table border="1">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Book</th>
+    <th>Student</th>
+    <th>Status</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <!-- Loop Orders -->
+  <tr>
+    <td>1</td>
+    <td>Book A</td>
+    <td>Student X</td>
+    <td>Pending</td>
+    <td>
+      <a href="/orders/edit/1">Edit</a>
+      <a href="/orders/delete/1">Delete</a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

@@ -13,7 +13,8 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/login", "/css/**", "/js/**").permitAll() // Açıq URL-lər
+                        .requestMatchers("/login", "/css/**", "/js/**").permitAll()
+                        .requestMatchers("/dashboard/**").permitAll()
                         .anyRequest().authenticated() // Qalan URL-lər üçün autentifikasiya tələb olunur
                 );
 

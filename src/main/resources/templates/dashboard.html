@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="/css/styles.css"> <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/css/bootstrap.min.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Library Management System</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" th:href="@{/dashboard}">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/logout}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-4">
+    <div class="row">
+        <h1 class="text-center mb-4">Admin Dashboard</h1>
+    </div>
+
+    <div class="row">
+        <!-- Authors Module -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Authors</h5>
+                    <p class="card-text">Manage authors and their details.</p>
+                    <a th:href="@{/authors}" class="btn btn-primary">Go to Authors</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Categories Module -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Categories</h5>
+                    <p class="card-text">Manage book categories.</p>
+                    <a th:href="@{/categories}" class="btn btn-primary">Go to Categories</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Books Module -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Books</h5>
+                    <p class="card-text">Manage books in the library.</p>
+                    <a th:href="@{/books}" class="btn btn-primary">Go to Books</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <!-- Orders Module -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Orders Management</h5>
+                    <p class="card-text">Manage orders and reservations.</p>
+                    <a th:href="@{/orders}" class="btn btn-primary">Go to Orders</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Students Module -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Students</h5>
+                    <p class="card-text">Manage students and their profiles.</p>
+                    <a th:href="@{/students}" class="btn btn-primary">Go to Students</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="bg-dark text-white text-center py-3 mt-5">
+    <p>&copy; 2025 Library Management System. All Rights Reserved.</p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
