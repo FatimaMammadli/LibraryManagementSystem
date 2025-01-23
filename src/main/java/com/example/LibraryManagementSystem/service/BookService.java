@@ -1,6 +1,7 @@
 package com.example.LibraryManagementSystem.service;
 import com.example.LibraryManagementSystem.model.Book;
 import com.example.LibraryManagementSystem.repository.BookRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,10 +9,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class BookService {
-
-    @Autowired
-    private BookRepository bookRepository;
+    private final BookRepository bookRepository;
 
     public List<Book> findAll() {
         return bookRepository.findAll();

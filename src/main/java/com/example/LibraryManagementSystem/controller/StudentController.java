@@ -1,17 +1,18 @@
 package com.example.LibraryManagementSystem.controller;
 import com.example.LibraryManagementSystem.model.Student;
 import com.example.LibraryManagementSystem.service.StudentService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/students")
 public class StudentController {
 
-    @Autowired
-    private StudentService studentService;
+    private final StudentService studentService;
 
     @GetMapping
     public String listStudents(Model model) {

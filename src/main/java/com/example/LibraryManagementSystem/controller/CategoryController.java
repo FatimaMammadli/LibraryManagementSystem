@@ -3,17 +3,19 @@ package com.example.LibraryManagementSystem.controller;
 import ch.qos.logback.core.model.Model;
 import com.example.LibraryManagementSystem.model.Category;
 import com.example.LibraryManagementSystem.service.CategoryService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/categories")
 public class CategoryController {
 
-    @Autowired
-    private CategoryService categoryService;
+
+    private final CategoryService categoryService;
 
     @GetMapping
     public String listCategories(Model model) {

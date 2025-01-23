@@ -2,15 +2,44 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Authors List</title>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin: 10px 0;
+        }
+
+        a {
+            margin-left: 10px;
+            color: blue;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
 <h1>Authors</h1>
-<a th:href="@{/authors/create}">Add New Author</a>
+
+<a th:href="@{/authors/create}" style="margin-bottom: 20px; display: inline-block;">Add New Author</a>
+
 <ul>
     <li th:each="author : ${authors}">
-        <span th:text="${author.name}"></span>
-        <a th:href="@{'/authors/delete/' + ${author.id}}">Delete</a>
+        <span th:text="${author.name}">Author Name</span>
+        <!-- Edit and Delete Links -->
+        <a th:href="@{'/authors/edit/' + ${author.id}}" style="color: green;">Edit</a>
+        <a th:href="@{'/authors/delete/' + ${author.id}}" style="color: red;" onclick="return confirm('Are you sure you want to delete this author?');">Delete</a>
     </li>
 </ul>
+
+<a th:href="@{/dashboard}" style="margin-top: 20px; display: inline-block;">Back to Dashboard</a>
 </body>
 </html>

@@ -1,10 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Categories List</title>
 </head>
 <body>
-
+<h1>Categories</h1>
+<a th:href="@{/categories/create}">Add New Category</a>
+<ul>
+    <li th:each="category : ${categories}">
+        <span th:text="${category.name}">Category Name</span>
+        <a th:href="@{'/categories/edit/' + ${category.id}}">Edit</a>
+        <a th:href="@{'/categories/delete/' + ${category.id}}" onclick="return confirm('Are you sure?');" style="color: red;">Delete</a>
+    </li>
+</ul>
 </body>
 </html>

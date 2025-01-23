@@ -3,17 +3,18 @@ package com.example.LibraryManagementSystem.controller;
 import ch.qos.logback.core.model.Model;
 import com.example.LibraryManagementSystem.model.Author;
 import com.example.LibraryManagementSystem.service.AuthorService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/authors")
 public class AuthorController {
 
-    @Autowired
-    private AuthorService authorService;
+    private final AuthorService authorService;
 
     @GetMapping
     public String listAuthors(Model model) {

@@ -14,7 +14,6 @@ public class AuthorService {
 
     private final AuthorRepository authorRepository;
 
-
     public List<Author> findAll() {
         return authorRepository.findAll();
     }
@@ -26,4 +25,5 @@ public class AuthorService {
     public void deleteById(Long id) {
         authorRepository.deleteById(id);
     }
+
 }

@@ -1,38 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book List</title>
+    <title>Books List</title>
 </head>
 <body>
-<h2>Books</h2>
-<a href="/books/create">Add New Book</a>
-<table border="1">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Title</th>
-        <th>Authors</th>
-        <th>Publisher</th>
-        <th>Year</th>
-        <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <!-- Loop Books -->
-    <tr>
-        <td>1</td>
-        <td>Book Title</td>
-        <td>Author A</td>
-        <td>Publisher Name</td>
-        <td>2023</td>
-        <td>
-            <a href="/books/edit/1">Edit</a>
-            <a href="/books/delete/1">Delete</a>
-        </td>
-    </tr>
-    </tbody>
-</table>
+<h1>Books List</h1>
+<a th:href="@{/books/create}">Add New Book</a>
+<ul>
+    <li th:each="book : ${books}">
+        <span th:text="${book.name}">Book Name</span>
+        by <span th:each="author : ${book.authors}" th:text="${author.name}">Author</span>
+        <br>
+        Published by <span th:text="${book.publisher}"></span> in <span th:text="${book.publishedYear}"></span>
+        <br>
+        <a th:href="@{'/books/edit/' + ${book.id}}">Edit</a>
+        <a th:href="@{'/books/delete/' + ${book.id}}" onclick="return confirm('Are you sure?');" style="color: red;">Delete</a>
+    </li>
+</ul>
 </body>
 </html>
