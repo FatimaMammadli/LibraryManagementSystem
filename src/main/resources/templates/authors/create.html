@@ -25,17 +25,12 @@
 <body>
 <h1>Create Author</h1>
 
-<!-- Display validation errors -->
-<div th:if="${#fields.hasErrors('name')}" style="color: red;">
-    <p th:errors="*{name}">Name error</p>
-</div>
-
-<form th:action="@{/authors}" th:object="${author}" method="post">
+<form th:action="@{/dashboard/authors/create}" th:object="${author}" method="post">
     <label for="name">Name:</label>
     <input type="text" id="name" th:field="*{name}" placeholder="Enter author's name" required>
     <button type="submit">Save</button>
 </form>
 
-<a th:href="@{/authors}" style="margin-top: 20px; display: inline-block;">Back to Authors List</a>
+<a th:href="@{/dashboard/authors}" style="margin-top: 20px; display: inline-block;">Back to Authors List</a>
 </body>
 </html>
