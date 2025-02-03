@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Entity
     @Table(name = "orders")
     @Getter
@@ -16,12 +18,15 @@ import lombok.Setter;
         private String bookTitle;
         private String studentName;
 
-        @ManyToOne
-        private Book book;
 
-        @ManyToOne
-        private Student student;
+    @ManyToOne
+    @JoinColumn(name = "student_id")
+    private Student student;
 
-        private String status;
+    @ManyToOne
+    @JoinColumn(name = "book_id")
+    private Book book;
+
+    private LocalDateTime orderDate;
     }
 

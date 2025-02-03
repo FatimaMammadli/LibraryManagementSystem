@@ -11,8 +11,9 @@
     <h1 class="text-center text-success">➕ Yeni Kitab Əlavə Et</h1>
     <a th:href="@{/dashboard/books}" class="btn btn-secondary mb-3">🔙 Geri</a>
 
-    <form th:action="@{/dashboard/books/create}" th:object="${book}" method="post" class="card p-4 shadow-lg">
-        <div class="mb-3">
+    <form th:action="@{/dashboard/books/update/{id}(id=${book.id})}" th:object="${book}" method="post" class="card p-4 shadow-lg">
+
+    <div class="mb-3">
             <label class="form-label">📖 Ad:</label>
             <input type="text" th:field="*{name}" class="form-control" required>
         </div>

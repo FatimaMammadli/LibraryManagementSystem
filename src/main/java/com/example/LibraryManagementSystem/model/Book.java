@@ -16,11 +16,16 @@ public class Book {
     @GeneratedValue
     private Long id;
     private String name;
+    private String isbn;
+    private String image;
     @ManyToMany
     @JoinTable
     private List<Author> authors=new ArrayList<>();
     private String publisher;
     private int publishedYear;
     private int quantity;
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
 
 }

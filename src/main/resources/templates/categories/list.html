@@ -1,17 +1,33 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Categories List</title>
+    <title>Kateqoriya Siyahısı</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
 </head>
-<body>
-<h1>Categories</h1>
-<a th:href="@{/categories/create}">Add New Category</a>
-<ul>
-    <li th:each="category : ${categories}">
-        <span th:text="${category.name}">Category Name</span>
-        <a th:href="@{'/categories/edit/' + ${category.id}}">Edit</a>
-        <a th:href="@{'/categories/delete/' + ${category.id}}" onclick="return confirm('Are you sure?');" style="color: red;">Delete</a>
-    </li>
-</ul>
+<body class="container mt-5">
+<h2 class="text-primary text-center">📂 Kateqoriya Siyahısı</h2>
+<a th:href="@{/dashboard}" class="btn btn-secondary mb-3">🔙 Dashboard-a Qayıt</a>
+<a th:href="@{/dashboard/categories/create}" class="btn btn-success mb-3">➕ Yeni Kateqoriya Əlavə Et</a>
+
+<table class="table table-bordered">
+    <thead class="table-dark">
+    <tr>
+        <th>ID</th>
+        <th>Kateqoriya Adı</th>
+        <th>Əməliyyatlar</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="category : ${categories}">
+        <td th:text="${category.id}"></td>
+        <td th:text="${category.name}"></td>
+        <td>
+            <a th:href="@{'/dashboard/categories/view/' + ${category.id}}" class="btn btn-info">👀 Bax</a>
+            <a th:href="@{'/dashboard/categories/edit/' + ${category.id}}" class="btn btn-warning">✏️ Redaktə</a>
+            <a th:href="@{'/dashboard/categories/delete/' + ${category.id}}" class="btn btn-danger">🗑️ Sil</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>

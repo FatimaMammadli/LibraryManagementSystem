@@ -1,36 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Order List</title>
+  <title>Sifarişlər Siyahısı</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
 <body>
-<h2>Orders</h2>
-<a href="/orders/create">Create New Order</a>
-<table border="1">
-  <thead>
-  <tr>
-    <th>ID</th>
-    <th>Book</th>
-    <th>Student</th>
-    <th>Status</th>
-    <th>Actions</th>
-  </tr>
-  </thead>
-  <tbody>
-  <!-- Loop Orders -->
-  <tr>
-    <td>1</td>
-    <td>Book A</td>
-    <td>Student X</td>
-    <td>Pending</td>
-    <td>
-      <a href="/orders/edit/1">Edit</a>
-      <a href="/orders/delete/1">Delete</a>
-    </td>
-  </tr>
-  </tbody>
-</table>
+
+<div class="container mt-4">
+  <h2 class="text-center text-primary">📚 Sifarişlər Siyahısı</h2>
+
+  <a href="/dashboard" class="btn btn-secondary mb-3">🔙 Dashboard-a Qayıt</a>
+  <a href="/dashboard/orders/create" class="btn btn-success mb-3">➕ Yeni Sifariş</a>
+
+  <table class="table table-bordered table-striped">
+    <thead class="table-dark">
+    <tr>
+      <th>ID</th>
+      <th>Tələbə</th>
+      <th>Kitab</th>
+      <th>Sifariş Tarixi</th>
+      <th>Qaytarılma Tarixi</th>
+      <th>Əməliyyatlar</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="order : ${orders}">
+      <td th:text="${order.id}"></td>
+      <td th:text="${order.student.name}"></td>
+      <td th:text="${order.book.name}"></td>
+      <td th:text="${order.orderDate}"></td>
+      <td th:text="${order.returnDate} ?: 'Hələ qaytarılmayıb'"></td>
+      <td>
+        <a th:href="@{/dashboard/orders/view/{id}(id=${order.id})}" class="btn btn-info">👁 Bax</a>
+        <a th:href="@{/dashboard/orders/delete/{id}(id=${order.id})}" class="btn btn-danger">🗑 Sil</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
 </body>
 </html>

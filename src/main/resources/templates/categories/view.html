@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Kateqoriya Məlumatları</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+</head>
+<body class="container mt-5">
+<h2 class="text-primary text-center">📂 Kateqoriya: <span th:text="${category.name}"></span></h2>
+<a th:href="@{/dashboard/categories}" class="btn btn-secondary mb-3">🔙 Geri</a>
+
+<h3>📖 Kitablar</h3>
+<ul>
+    <li th:each="book : ${books}" th:text="${book.name}"></li>
+</ul>
+</body>
+</html>

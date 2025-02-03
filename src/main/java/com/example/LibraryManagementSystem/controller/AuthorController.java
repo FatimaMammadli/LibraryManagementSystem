@@ -7,9 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/dashboard/authors") // Now all routes are under /dashboard/authors
+@RequestMapping("/dashboard/authors")
 public class AuthorController {
 
     private final AuthorService authorService;
@@ -17,38 +19,45 @@ public class AuthorController {
     @GetMapping
     public String listAuthors(Model model) {
         model.addAttribute("authors", authorService.findAll());
-        return "authors/list"; // templates/authors/list.html
+        return "authors/list";
     }
-
+    @GetMapping("/view/{id}")
+    public String viewAuthor(@PathVariable Long id, Model model) {
+        Optional<Author> author = Optional.ofNullable(authorService.findById(id));
+        if (author.isPresent()) {
+            model.addAttribute("author", author.get());
+            return "authors/view"; // templates/authors/view.html
+        }
+        return "redirect:/dashboard/authors";
+    }
     @GetMapping("/create")
     public String showCreateForm(Model model) {
         model.addAttribute("author", new Author());
-        return "authors/create"; // templates/authors/create.html
+        return "authors/create";
     }
 
     @PostMapping("/create")
     public String createAuthor(@ModelAttribute Author author) {
         authorService.save(author);
-        return "redirect:/dashboard/authors"; // Redirect back to dashboard authors list
+        return "redirect:/dashboard/authors";
     }
 
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable Long id, Model model) {
         Author author = authorService.findById(id);
         model.addAttribute("author", author);
-        return "authors/edit"; // templates/authors/edit.html
+        return "authors/edit";
     }
 
     @PostMapping("/edit/{id}")
     public String updateAuthor(@PathVariable Long id, @ModelAttribute Author author) {
         author.setId(id);
         authorService.save(author);
-        return "redirect:/dashboard/authors"; // Ensure consistent redirect to dashboard authors list
+        return "redirect:/dashboard/authors";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteAuthor(@PathVariable Long id) {
         authorService.deleteById(id);
-        return "redirect:/dashboard/authors"; // Redirect back to dashboard authors list
-    }
+        return "redirect:/dashboard/authors"; }
 }
