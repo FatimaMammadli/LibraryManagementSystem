@@ -33,8 +33,8 @@ public class AuthorService {
     }
 
     public AuthorDTO save(AuthorDTO authorDTO) {
-        List<Book> books = bookRepository.findAllById(authorDTO.getBookIds());
-        Author author = AuthorMapper.toEntity(authorDTO, books);
+//        List<Book> books = bookRepository.findAllById(authorDTO.getBookIds());
+        Author author = AuthorMapper.toEntity(authorDTO);
         author = authorRepository.save(author);
         return AuthorMapper.toDTO(author);
     }
@@ -47,9 +47,9 @@ public class AuthorService {
         Author existingAuthor = authorRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Author not found with ID: " + id));
 
-        List<Book> books = bookRepository.findAllById(authorDTO.getBookIds());
+//        List<Book> books = bookRepository.findAllById(authorDTO.getBookIds());
         existingAuthor.setName(authorDTO.getName());
-        existingAuthor.setBooks(books);
+//        existingAuthor.setBooks(books);
 
         return AuthorMapper.toDTO(authorRepository.save(existingAuthor));
     }

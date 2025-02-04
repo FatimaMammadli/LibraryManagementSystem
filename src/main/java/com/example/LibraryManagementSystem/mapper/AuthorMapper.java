@@ -20,14 +20,13 @@ public class AuthorMapper {
             return new AuthorDTO(author.getId(), author.getName(), bookIds);
         }
 
-        public static Author toEntity(AuthorDTO authorDTO, List<Book> books) {
+        public static Author toEntity(AuthorDTO authorDTO) {
             if (authorDTO == null) {
                 return null;
             }
             Author author = new Author();
             author.setId(authorDTO.getId());
             author.setName(authorDTO.getName());
-            author.setBooks(books);
             return author;
         }
     }

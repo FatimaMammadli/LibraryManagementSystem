@@ -18,14 +18,13 @@ public class CategoryMapper {
         return new CategoryDTO(category.getId(), category.getName(), bookIds);
     }
 
-    public static Category toEntity(CategoryDTO categoryDTO, List<Book> books) {
+    public static Category toEntity(CategoryDTO categoryDTO) {
         if (categoryDTO == null) {
             return null;
         }
         Category category = new Category();
         category.setId(categoryDTO.getId());
         category.setName(categoryDTO.getName());
-        category.setBooks(books);
         return category;
     }
 }

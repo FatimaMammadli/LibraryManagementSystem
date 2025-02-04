@@ -33,8 +33,8 @@ public class CategoryService {
     }
 
     public CategoryDTO save(CategoryDTO categoryDTO) {
-        List<Book> books = bookRepository.findAllById(categoryDTO.getBookIds());
-        Category category = CategoryMapper.toEntity(categoryDTO, books);
+//        List<Book> books = bookRepository.findAllById(categoryDTO.getBookIds());
+        Category category = CategoryMapper.toEntity(categoryDTO);
         category = categoryRepository.save(category);
         return CategoryMapper.toDTO(category);
     }
@@ -43,9 +43,8 @@ public class CategoryService {
         Category existingCategory = categoryRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Kateqoriya tapılmadı!"));
 
-        List<Book> books = bookRepository.findAllById(categoryDTO.getBookIds());
+//        List<Book> books = bookRepository.findAllById(categoryDTO.getBookIds());
         existingCategory.setName(categoryDTO.getName());
-        existingCategory.setBooks(books);
 
         return CategoryMapper.toDTO(categoryRepository.save(existingCategory));
     }
