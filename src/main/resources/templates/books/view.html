@@ -1,27 +1,27 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Kitab Detalları</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <title>Kitab Detalları</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body class="bg-light">
-
+<body>
 <div class="container mt-4">
-    <h1 class="text-center text-primary">📖 Kitab Detalları</h1>
-    <a th:href="@{/dashboard/books}" class="btn btn-secondary mb-3">🔙 Geri</a>
-
-    <div class="card p-4 shadow-lg">
-        <h3><strong>📌 Ad:</strong> <span th:text="${book.name}"></span></h3>
-        <p><strong>🔢 ISBN:</strong> <span th:text="${book.isbn}"></span></p>
-        <p><strong>🏢 Nəşriyyat:</strong> <span th:text="${book.publisher}"></span></p>
-        <p><strong>📅 Nəşr ili:</strong> <span th:text="${book.publishedYear}"></span></p>
-        <p><strong>📦 Ədəd:</strong> <span th:text="${book.quantity}"></span></p>
-        <p><strong>📚 Kateqoriya:</strong> <span th:text="${book.category.name}"></span></p>
-        <p><strong>✍ Müəlliflər:</strong> <span th:each="author : ${book.authors}" th:text="${author.name} + ' '"></span></p>
-        <img th:src="${book.image}" class="img-fluid rounded shadow-lg" width="300" alt="Kitab Şəkli">
+    <h2 class="text-info"><i class="fas fa-book-open"></i> Kitab Məlumatları</h2>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title"><strong>Ad:</strong> <span th:text="${book.name}"></span></h5>
+            <p><strong>ISBN:</strong> <span th:text="${book.isbn}"></span></p>
+            <p><strong>Nəşriyyat:</strong> <span th:text="${book.publisher}"></span></p>
+            <p><strong>Nəşr ili:</strong> <span th:text="${book.publishedYear}"></span></p>
+            <p><strong>Mövcud nüsxə:</strong> <span th:text="${book.quantity}"></span></p>
+            <h6 class="text-muted">Müəlliflər:</h6>
+            <ul class="list-group">
+                <li class="list-group-item" th:each="author : ${book.authorIds}" th:text="${author}"></li>
+            </ul>
+        </div>
     </div>
+    <a href="/dashboard/books" class="btn btn-secondary mt-3"><i class="fas fa-arrow-left"></i> Geri</a>
 </div>
-
 </body>
 </html>

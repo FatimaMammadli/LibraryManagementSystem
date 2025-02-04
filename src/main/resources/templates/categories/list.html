@@ -1,33 +1,48 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Kateqoriya Siyahısı</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <title>Kateqoriyalar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
 </head>
-<body class="container mt-5">
-<h2 class="text-primary text-center">📂 Kateqoriya Siyahısı</h2>
-<a th:href="@{/dashboard}" class="btn btn-secondary mb-3">🔙 Dashboard-a Qayıt</a>
-<a th:href="@{/dashboard/categories/create}" class="btn btn-success mb-3">➕ Yeni Kateqoriya Əlavə Et</a>
+<body>
+<div class="container mt-4">
+    <h2 class="text-primary text-center"><i class="fas fa-layer-group"></i> Kateqoriyalar</h2>
 
-<table class="table table-bordered">
-    <thead class="table-dark">
-    <tr>
-        <th>ID</th>
-        <th>Kateqoriya Adı</th>
-        <th>Əməliyyatlar</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="category : ${categories}">
-        <td th:text="${category.id}"></td>
-        <td th:text="${category.name}"></td>
-        <td>
-            <a th:href="@{'/dashboard/categories/view/' + ${category.id}}" class="btn btn-info">👀 Bax</a>
-            <a th:href="@{'/dashboard/categories/edit/' + ${category.id}}" class="btn btn-warning">✏️ Redaktə</a>
-            <a th:href="@{'/dashboard/categories/delete/' + ${category.id}}" class="btn btn-danger">🗑️ Sil</a>
-        </td>
-    </tr>
-    </tbody>
-</table>
+    <!-- Yeni Kateqoriya Əlavə Et -->
+    <a href="/dashboard/categories/create" class="btn btn-success mb-3">
+        <i class="fas fa-plus"></i> Yeni Kateqoriya
+    </a>
+
+    <table class="table table-hover table-bordered">
+        <thead class="table-dark">
+        <tr>
+            <th>#</th>
+            <th>Ad</th>
+            <th>Əməliyyatlar</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="category, iterStat : ${categories}">
+            <td th:text="${iterStat.index + 1}"></td>
+            <td th:text="${category.name}"></td>
+            <td>
+                <a th:href="@{/dashboard/categories/view/{id}(id=${category.id})}" class="btn btn-info btn-sm">
+                    <i class="fas fa-eye"></i> Bax
+                </a>
+                <a th:href="@{/dashboard/categories/edit/{id}(id=${category.id})}" class="btn btn-warning btn-sm">
+                    <i class="fas fa-edit"></i> Redaktə et
+                </a>
+                <form th:action="@{/dashboard/categories/delete/{id}(id=${category.id})}" method="post" style="display:inline;">
+                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Silmək istədiyinizə əminsiniz?')">
+                        <i class="fas fa-trash"></i> Sil
+                    </button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

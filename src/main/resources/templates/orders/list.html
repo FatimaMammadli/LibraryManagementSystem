@@ -1,43 +1,54 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Sifarişlər Siyahısı</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <meta charset="UTF-8">
+  <title>Sifarişlər</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-
 <div class="container mt-4">
-  <h2 class="text-center text-primary">📚 Sifarişlər Siyahısı</h2>
+  <h2 class="text-primary text-center"><i class="fas fa-shopping-cart"></i> Sifarişlər</h2>
 
-  <a href="/dashboard" class="btn btn-secondary mb-3">🔙 Dashboard-a Qayıt</a>
-  <a href="/dashboard/orders/create" class="btn btn-success mb-3">➕ Yeni Sifariş</a>
+  <!-- Yeni Sifariş Əlavə Et -->
+  <a href="/dashboard/orders/create" class="btn btn-success mb-3">
+    <i class="fas fa-plus"></i> Yeni Sifariş
+  </a>
 
-  <table class="table table-bordered table-striped">
+  <table class="table table-hover table-bordered">
     <thead class="table-dark">
     <tr>
-      <th>ID</th>
+      <th>#</th>
       <th>Tələbə</th>
       <th>Kitab</th>
       <th>Sifariş Tarixi</th>
-      <th>Qaytarılma Tarixi</th>
       <th>Əməliyyatlar</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="order : ${orders}">
-      <td th:text="${order.id}"></td>
-      <td th:text="${order.student.name}"></td>
-      <td th:text="${order.book.name}"></td>
-      <td th:text="${order.orderDate}"></td>
-      <td th:text="${order.returnDate} ?: 'Hələ qaytarılmayıb'"></td>
+    <tr th:each="order, iterStat : ${orders}">
+      <td th:text="${iterStat.index + 1}"></td>
+      <td th:text="${order.studentName}"></td>
+      <td th:text="${order.bookTitle}"></td>
+      <td th:text="${#temporals.format(order.orderDate, 'yyyy-MM-dd HH:mm')}"></td>
       <td>
-        <a th:href="@{/dashboard/orders/view/{id}(id=${order.id})}" class="btn btn-info">👁 Bax</a>
-        <a th:href="@{/dashboard/orders/delete/{id}(id=${order.id})}" class="btn btn-danger">🗑 Sil</a>
+        <a th:href="@{/dashboard/orders/view/{id}(id=${order.id})}" class="btn btn-info btn-sm">
+          <i class="fas fa-eye"></i> Bax
+        </a>
+        <form th:action="@{/dashboard/orders/return/{id}(id=${order.id})}" method="post" style="display:inline;">
+          <button type="submit" class="btn btn-warning btn-sm" onclick="return confirm('Sifarişi geri qaytarmaq istədiyinizə əminsiniz?')">
+            <i class="fas fa-undo"></i> Geri Qaytar
+          </button>
+        </form>
+        <form th:action="@{/dashboard/orders/delete/{id}(id=${order.id})}" method="post" style="display:inline;">
+          <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Silmək istədiyinizə əminsiniz?')">
+            <i class="fas fa-trash"></i> Sil
+          </button>
+        </form>
       </td>
     </tr>
     </tbody>
   </table>
 </div>
-
 </body>
 </html>

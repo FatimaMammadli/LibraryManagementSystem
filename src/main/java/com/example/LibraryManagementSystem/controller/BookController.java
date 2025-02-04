@@ -1,6 +1,7 @@
 package com.example.LibraryManagementSystem.controller;
 
-import com.example.LibraryManagementSystem.model.Book;
+import com.example.LibraryManagementSystem.DTO.BookDTO;
+import com.example.LibraryManagementSystem.DTO.AuthorDTO;
 import com.example.LibraryManagementSystem.service.BookService;
 import com.example.LibraryManagementSystem.service.AuthorService;
 import com.example.LibraryManagementSystem.service.CategoryService;
@@ -10,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/dashboard/books")
@@ -21,60 +21,57 @@ public class BookController {
     private final AuthorService authorService;
     private final CategoryService categoryService;
 
+
     @GetMapping
     public String listBooks(Model model) {
-        List<Book> books = bookService.findAll();
+        List<BookDTO> books = bookService.findAll();
         model.addAttribute("books", books);
-        return "books/list";  // templates/books/list.html
+        return "books/list";
     }
 
 
     @GetMapping("/create")
     public String showCreateForm(Model model) {
-        model.addAttribute("book", new Book());
-        model.addAttribute("authors", authorService.findAll());
-        model.addAttribute("categories", categoryService.findAll());
-        return "books/create";  // templates/books/create.html
+        model.addAttribute("book", new BookDTO());
+        model.addAttribute("authors", authorService.findAll()); // Mövcud müəlliflər
+        model.addAttribute("categories", categoryService.findAll()); // Mövcud kateqoriyalar
+        return "books/create";
     }
-
 
     @PostMapping("/create")
-    public String createBook(@ModelAttribute Book book) {
-        bookService.save(book);
-        return "redirect:/dashboard/books";
-    }
-
-    @GetMapping("/view/{id}")
-    public String viewBook(@PathVariable Long id, Model model) {
-        Optional<Book> book = bookService.findById(id);
-        if (book.isPresent()) {
-            model.addAttribute("book", book.get());
-            return "books/view"; // templates/books/view.html
-        }
+    public String createBook(@ModelAttribute BookDTO bookDTO) {
+        bookService.save(bookDTO);
         return "redirect:/dashboard/books";
     }
 
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable Long id, Model model) {
-        Optional<Book> book = bookService.findById(id);
-        if (book.isPresent()) {
-            model.addAttribute("book", book.get());
-            model.addAttribute("authors", authorService.findAll());
-            model.addAttribute("categories", categoryService.findAll());
-            return "books/edit";
-        }
-        return "redirect:/dashboard/books";
+        BookDTO book = bookService.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Kitab tapılmadı!"));
+        model.addAttribute("book", book);
+        model.addAttribute("authors", authorService.findAll()); // Mövcud müəlliflər
+        model.addAttribute("categories", categoryService.findAll()); // Mövcud kateqoriyalar
+        return "books/edit";
     }
 
     @PostMapping("/update/{id}")
-    public String updateBook(@PathVariable Long id, @ModelAttribute Book book) {
-        bookService.updateBook(id, book);
+    public String updateBook(@PathVariable Long id, @ModelAttribute BookDTO bookDTO) {
+        bookService.update(id, bookDTO);
         return "redirect:/dashboard/books";
     }
 
-    @GetMapping("/delete/{id}")
+
+    @DeleteMapping("/delete/{id}")
     public String deleteBook(@PathVariable Long id) {
-        bookService.deleteById(id);
+        bookService.delete(id);
         return "redirect:/dashboard/books";
+    }
+
+    @GetMapping("/view/{id}")
+    public String viewBook(@PathVariable Long id, Model model) {
+        BookDTO book = bookService.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Kitab tapılmadı! ID: " + id));
+        model.addAttribute("book", book);
+        return "books/view";
     }
 }

@@ -1,78 +1,63 @@
 package com.example.LibraryManagementSystem.controller;
 
-import ch.qos.logback.core.model.Model;
-import com.example.LibraryManagementSystem.model.Book;
-import com.example.LibraryManagementSystem.model.Category;
+import com.example.LibraryManagementSystem.DTO.CategoryDTO;
 import com.example.LibraryManagementSystem.service.CategoryService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
-
 
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/dashboard/categories")
 public class CategoryController {
 
-
     private final CategoryService categoryService;
 
     @GetMapping
     public String listCategories(Model model) {
-        List<Category> categories = categoryService.findAll();
-        model.addText("categories");
+        List<CategoryDTO> categories = categoryService.findAll();
+        model.addAttribute("categories", categories);
         return "categories/list";
-    }
-
-
-    @GetMapping("/create")
-    public String showCreateForm(Model model) {
-        model.addText("category");
-        return "categories/create";
-    }
-
-    @PostMapping("/create")
-    public String createCategory(@ModelAttribute Category category) {
-        categoryService.save(category);
-        return "redirect:/dashboard/categories";
     }
 
     @GetMapping("/view/{id}")
     public String viewCategory(@PathVariable Long id, Model model) {
-        Optional<Category> category = categoryService.findById(id);
-        if (category.isPresent()) {
-            model.addText("category");
-            List<Book> books = categoryService.getBooksByCategory(id);
-            model.addText("books");
-            return "categories/view";
-        }
+        CategoryDTO categoryDTO = categoryService.findById(id);
+        model.addAttribute("category", categoryDTO);
+        return "categories/view";
+    }
+
+    @GetMapping("/create")
+    public String showCreateForm(Model model) {
+        model.addAttribute("category", new CategoryDTO());
+        return "categories/create";
+    }
+
+    @PostMapping("/create")
+    public String createCategory(@ModelAttribute CategoryDTO categoryDTO) {
+        categoryService.save(categoryDTO);
         return "redirect:/dashboard/categories";
     }
 
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable Long id, Model model) {
-        Optional<Category> category = categoryService.findById(id);
-        if (category.isPresent()) {
-            model.addText("category");
-            return "categories/edit";
-        }
+        CategoryDTO categoryDTO = categoryService.findById(id);
+        model.addAttribute("category", categoryDTO);
+        return "categories/edit";
+    }
+
+    @PostMapping("/update/{id}")
+    public String updateCategory(@PathVariable Long id, @ModelAttribute CategoryDTO categoryDTO) {
+        categoryService.update(id, categoryDTO);
         return "redirect:/dashboard/categories";
     }
 
-    @PostMapping("/edit/{id}")
-    public String updateCategory(@PathVariable Long id, @ModelAttribute Category category) {
-        category.setId(id);
-        categoryService.save(category);
-        return "redirect:/dashboard/categories";
-    }
-
-    @GetMapping("/delete/{id}")
+    @PostMapping("/delete/{id}")
     public String deleteCategory(@PathVariable Long id) {
-        categoryService.deleteById(id);
+        categoryService.delete(id);
         return "redirect:/dashboard/categories";
     }
 }

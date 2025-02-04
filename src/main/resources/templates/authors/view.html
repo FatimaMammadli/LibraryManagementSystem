@@ -2,54 +2,23 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Author Details</title>
+  <title>Müəllif Detalları</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-  <style>
-    body {
-      background-color: #f8f9fa;
-    }
-    .container {
-      max-width: 600px;
-      margin: 50px auto;
-      background: white;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
-    }
-    h2 {
-      text-align: center;
-      color: #343a40;
-      margin-bottom: 20px;
-    }
-    .info-box {
-      background: #fff;
-      padding: 15px;
-      border-radius: 5px;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    }
-  </style>
 </head>
 <body>
-
-<div class="container">
-  <h2><i class="fas fa-user"></i> Müəllif Detalları</h2>
-
-  <div class="info-box">
-    <p><strong>ID:</strong> <span th:text="${author.id}"></span></p>
-    <p><strong>Ad:</strong> <span th:text="${author.name}"></span></p>
+<div class="container mt-4">
+  <h2 class="text-info"><i class="fas fa-user"></i> Müəllif Məlumatları</h2>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title"><strong>Ad:</strong> <span th:text="${author.name}"></span></h5>
+      <h6 class="card-subtitle mb-2 text-muted">Yazdığı Kitablar:</h6>
+      <ul class="list-group">
+        <li class="list-group-item" th:each="book : ${author.bookIds}" th:text="${book}"></li>
+      </ul>
+    </div>
   </div>
-
-  <h4 class="mt-4">📚 Müəllifin Kitabları</h4>
-  <ul class="list-group">
-    <li class="list-group-item" th:each="book : ${author.books}" th:text="${book.name}"></li>
-  </ul>
-
-  <a th:href="@{/dashboard/authors}" class="btn btn-secondary mt-3"><i class="fas fa-arrow-left"></i> Müəllif Siyahısına Qayıt</a>
+  <a href="/dashboard/authors" class="btn btn-secondary mt-3"><i class="fas fa-arrow-left"></i> Geri</a>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
 </body>
 </html>

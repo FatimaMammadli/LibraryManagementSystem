@@ -1,16 +1,23 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Kateqoriya Məlumatları</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <title>Kateqoriya Detalları</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body class="container mt-5">
-<h2 class="text-primary text-center">📂 Kateqoriya: <span th:text="${category.name}"></span></h2>
-<a th:href="@{/dashboard/categories}" class="btn btn-secondary mb-3">🔙 Geri</a>
-
-<h3>📖 Kitablar</h3>
-<ul>
-    <li th:each="book : ${books}" th:text="${book.name}"></li>
-</ul>
+<body>
+<div class="container mt-4">
+    <h2 class="text-info"><i class="fas fa-layer-group"></i> Kateqoriya Məlumatları</h2>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title"><strong>Ad:</strong> <span th:text="${category.name}"></span></h5>
+            <h6 class="text-muted">Bu kateqoriyaya aid kitablar:</h6>
+            <ul class="list-group">
+                <li class="list-group-item" th:each="book : ${category.bookIds}" th:text="${book}"></li>
+            </ul>
+        </div>
+    </div>
+    <a href="/dashboard/categories" class="btn btn-secondary mt-3"><i class="fas fa-arrow-left"></i> Geri</a>
+</div>
 </body>
 </html>

@@ -1,36 +1,32 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+  <meta charset="UTF-8">
   <title>Yeni Sifariş</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-
 <div class="container mt-4">
-  <h2 class="text-center text-success">➕ Yeni Sifariş</h2>
+  <h2 class="text-success"><i class="fas fa-plus-circle"></i> Yeni Sifariş Əlavə Et</h2>
+  <form th:action="@{/dashboard/orders/create}" th:object="${order}" method="post">
 
-  <a href="/dashboard/orders" class="btn btn-secondary mb-3">🔙 Geri</a>
-
-  <form th:action="@{/dashboard/orders/create}" method="post" th:object="${order}">
     <div class="mb-3">
-      <label for="student" class="form-label">Tələbə Seç:</label>
-      <select id="student" name="student.id" class="form-control" required>
+      <label class="form-label">Tələbə:</label>
+      <select class="form-select" th:field="*{studentId}">
         <option th:each="student : ${students}" th:value="${student.id}" th:text="${student.name}"></option>
       </select>
     </div>
 
     <div class="mb-3">
-      <label for="book" class="form-label">Kitab Seç:</label>
-      <select id="book" name="book.id" class="form-control" required>
+      <label class="form-label">Kitab:</label>
+      <select class="form-select" th:field="*{bookId}">
         <option th:each="book : ${books}" th:value="${book.id}" th:text="${book.name}"></option>
       </select>
     </div>
 
-    <button type="submit" class="btn btn-primary">📌 Sifarişi Yarat</button>
-
-    <div th:if="${error}" class="alert alert-danger mt-3" th:text="${error}"></div>
+    <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Yadda Saxla</button>
+    <a href="/dashboard/orders" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Geri</a>
   </form>
 </div>
-
 </body>
 </html>

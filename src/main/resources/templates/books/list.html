@@ -1,49 +1,52 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Kitab Siyahısı</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <title>Kitablar Siyahısı</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
 </head>
-<body class="bg-light">
-
+<body>
 <div class="container mt-4">
-    <h1 class="text-center text-primary">📚 Kitab Siyahısı</h1>
-    <div class="d-flex justify-content-between mb-3">
-        <a th:href="@{/dashboard}" class="btn btn-secondary">🔙 Dashboard-a Qayıt</a>
-        <a th:href="@{/dashboard/books/create}" class="btn btn-success">➕ Yeni Kitab Əlavə Et</a>
-    </div>
+    <h2 class="text-primary text-center"><i class="fas fa-book"></i> Kitablar Siyahısı</h2>
 
-    <table class="table table-striped table-bordered">
+    <!-- Yeni Kitab Əlavə Et -->
+    <a href="/dashboard/books/create" class="btn btn-success mb-3">
+        <i class="fas fa-plus"></i> Yeni Kitab
+    </a>
+
+    <table class="table table-hover table-bordered">
         <thead class="table-dark">
         <tr>
-            <th>ID</th>
+            <th>#</th>
             <th>Ad</th>
             <th>ISBN</th>
             <th>Nəşriyyat</th>
-            <th>Nəşr ili</th>
-            <th>Ədəd</th>
             <th>Əməliyyatlar</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="book : ${books}">
-            <td th:text="${book.id}"></td>
+        <tr th:each="book, iterStat : ${books}">
+            <td th:text="${iterStat.index + 1}"></td>
             <td th:text="${book.name}"></td>
             <td th:text="${book.isbn}"></td>
             <td th:text="${book.publisher}"></td>
-            <td th:text="${book.publishedYear}"></td>
-            <td th:text="${book.quantity}"></td>
             <td>
-                <a th:href="@{/dashboard/books/view/{id}(id=${book.id})}" class="btn btn-info btn-sm">👁 Bax</a>
-                <a th:href="@{/dashboard/books/edit/{id}(id=${book.id})}" class="btn btn-warning btn-sm">✏ Redaktə</a>
-                <a th:href="@{/dashboard/books/delete/{id}(id=${book.id})}" class="btn btn-danger btn-sm"
-                   onclick="return confirm('Bu kitabı silmək istədiyinizə əminsiniz?');">🗑 Sil</a>
+                <a th:href="@{/dashboard/books/view/{id}(id=${book.id})}" class="btn btn-info btn-sm">
+                    <i class="fas fa-eye"></i> Bax
+                </a>
+                <a th:href="@{/dashboard/books/edit/{id}(id=${book.id})}" class="btn btn-warning btn-sm">
+                    <i class="fas fa-edit"></i> Redaktə et
+                </a>
+                <form th:action="@{/dashboard/books/delete/{id}(id=${book.id})}" method="post" style="display:inline;">
+                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Silmək istədiyinizə əminsiniz?')">
+                        <i class="fas fa-trash"></i> Sil
+                    </button>
+                </form>
             </td>
         </tr>
         </tbody>
     </table>
 </div>
-
 </body>
 </html>

@@ -1,32 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+  <meta charset="UTF-8">
   <title>Sifariş Detalları</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-
 <div class="container mt-4">
-  <h2 class="text-center text-primary">📜 Sifariş Detalları</h2>
-
-  <a href="/dashboard/orders" class="btn btn-secondary mb-3">🔙 Geri</a>
-
+  <h2 class="text-info"><i class="fas fa-file-alt"></i> Sifariş Məlumatları</h2>
   <div class="card">
     <div class="card-body">
-      <h5 class="card-title">🆔 Sifariş ID: <span th:text="${order.id}"></span></h5>
-      <p class="card-text"><strong>👤 Tələbə:</strong> <span th:text="${order.student.name}"></span></p>
-      <p class="card-text"><strong>📖 Kitab:</strong> <span th:text="${order.book.name}"></span></p>
-      <p class="card-text"><strong>📅 Sifariş Tarixi:</strong> <span th:text="${order.orderDate}"></span></p>
-      <p class="card-text"><strong>📌 Qaytarılma Tarixi:</strong> <span th:text="${order.returnDate} ?: 'Hələ qaytarılmayıb'"></span></p>
-
-      <form th:action="@{/dashboard/orders/return/{id}(id=${order.id})}" method="post">
-        <button type="submit" class="btn btn-warning" th:if="${order.returnDate == null}">🔄 Kitabı Qaytar</button>
-      </form>
-
-      <a th:href="@{/dashboard/orders/delete/{id}(id=${order.id})}" class="btn btn-danger mt-3">🗑 Sifarişi Sil</a>
+      <h5 class="card-title"><strong>Tələbə:</strong> <span th:text="${order.studentName}"></span></h5>
+      <h5 class="card-title"><strong>Kitab:</strong> <span th:text="${order.bookTitle}"></span></h5>
+      <p><strong>Sifariş Tarixi:</strong> <span th:text="${#temporals.format(order.orderDate, 'yyyy-MM-dd HH:mm')}"></span></p>
     </div>
   </div>
+  <a href="/dashboard/orders" class="btn btn-secondary mt-3"><i class="fas fa-arrow-left"></i> Geri</a>
 </div>
-
 </body>
 </html>
