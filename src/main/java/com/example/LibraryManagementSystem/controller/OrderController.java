@@ -1,6 +1,6 @@
 package com.example.LibraryManagementSystem.controller;
 
-import com.example.LibraryManagementSystem.DTO.OrderDTO;
+import com.example.LibraryManagementSystem.dto.OrderDTO;
 import com.example.LibraryManagementSystem.service.BookService;
 import com.example.LibraryManagementSystem.service.OrderService;
 import com.example.LibraryManagementSystem.service.StudentService;

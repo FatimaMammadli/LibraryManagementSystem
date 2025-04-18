@@ -2,46 +2,85 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Kitabı Redaktə Et</title>
+    <title>Kitabı Redaktə Et 🎀</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+            font-family: 'Poppins', sans-serif;
+            color: #5a3d5c;
+        }
+        .container {
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            margin-top: 50px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        h2 {
+            color: #ff9800;
+            text-shadow: 1px 1px 3px rgba(255, 152, 0, 0.3);
+        }
+        .form-control, .form-select {
+            border-radius: 10px;
+            border: 2px solid #ff69b4;
+            transition: all 0.3s ease-in-out;
+        }
+        .form-control:focus, .form-select:focus {
+            border-color: #ff1493;
+            box-shadow: 0px 0px 10px rgba(255, 105, 180, 0.5);
+        }
+        .btn-custom {
+            background: #ff9800;
+            color: white;
+            font-weight: bold;
+            border-radius: 25px;
+            transition: all 0.3s ease-in-out;
+        }
+        .btn-custom:hover {
+            background: #ff5722;
+            transform: scale(1.05);
+        }
+        .btn-secondary {
+            border-radius: 25px;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-<div class="container mt-4">
-    <h2 class="text-warning"><i class="fas fa-edit"></i> Kitabı Redaktə Et</h2>
+<div class="container">
+    <h2 class="text-center"><i class="fas fa-edit"></i> Kitabı Redaktə Et 🎀</h2>
 
     <form th:action="@{/dashboard/books/update/{id}(id=${book.id})}" th:object="${book}" method="post">
-
         <div class="mb-3">
-            <label class="form-label">Kitab Adı:</label>
+            <label class="form-label"><i class="fas fa-book"></i> Kitab Adı:</label>
             <input type="text" th:field="*{name}" class="form-control" required>
         </div>
 
-
         <div class="mb-3">
-            <label class="form-label">ISBN:</label>
+            <label class="form-label"><i class="fas fa-barcode"></i> ISBN:</label>
             <input type="text" th:field="*{isbn}" class="form-control" required>
         </div>
 
-        <!-- Nəşriyyat -->
         <div class="mb-3">
-            <label class="form-label">Nəşriyyat:</label>
+            <label class="form-label"><i class="fas fa-building"></i> Nəşriyyat:</label>
             <input type="text" th:field="*{publisher}" class="form-control">
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Nəşr ili:</label>
+            <label class="form-label"><i class="fas fa-calendar"></i> Nəşr ili:</label>
             <input type="number" th:field="*{publishedYear}" class="form-control" min="1800" max="2100">
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Mövcud Nüsxə:</label>
+            <label class="form-label"><i class="fas fa-box"></i> Mövcud Nüsxə:</label>
             <input type="number" th:field="*{quantity}" class="form-control" min="1">
         </div>
 
-
         <div class="mb-3">
-            <label class="form-label">Müəlliflər:</label>
+            <label class="form-label"><i class="fas fa-user-edit"></i> Müəlliflər:</label>
             <select class="form-select" th:field="*{authorIds}" multiple>
                 <option th:each="author : ${authors}" th:value="${author.id}" th:text="${author.name}"
                         th:selected="${book.authorIds != null and book.authorIds.contains(author.id)}"></option>
@@ -49,15 +88,15 @@
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Kateqoriya:</label>
+            <label class="form-label"><i class="fas fa-layer-group"></i> Kateqoriya:</label>
             <select class="form-select" th:field="*{categoryId}">
                 <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"
                         th:selected="${book.categoryId == category.id}"></option>
             </select>
         </div>
 
-        <button type="submit" class="btn btn-warning"><i class="fas fa-save"></i> Yenilə</button>
-        <a href="/dashboard/books" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Geri</a>
+        <button type="submit" class="btn btn-custom w-100"><i class="fas fa-save"></i> Yenilə</button>
+        <a href="/dashboard/books" class="btn btn-secondary w-100 mt-2"><i class="fas fa-arrow-left"></i> Geri</a>
     </form>
 </div>
 </body>

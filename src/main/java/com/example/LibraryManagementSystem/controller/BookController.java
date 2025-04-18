@@ -1,9 +1,8 @@
 package com.example.LibraryManagementSystem.controller;
 
-import com.example.LibraryManagementSystem.DTO.BookDTO;
-import com.example.LibraryManagementSystem.DTO.AuthorDTO;
-import com.example.LibraryManagementSystem.service.BookService;
+import com.example.LibraryManagementSystem.dto.BookDTO;
 import com.example.LibraryManagementSystem.service.AuthorService;
+import com.example.LibraryManagementSystem.service.BookService;
 import com.example.LibraryManagementSystem.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -33,8 +32,8 @@ public class BookController {
     @GetMapping("/create")
     public String showCreateForm(Model model) {
         model.addAttribute("book", new BookDTO());
-        model.addAttribute("authors", authorService.findAll()); // Mövcud müəlliflər
-        model.addAttribute("categories", categoryService.findAll()); // Mövcud kateqoriyalar
+        model.addAttribute("authors", authorService.findAll());
+        model.addAttribute("categories", categoryService.findAll());
         return "books/create";
     }
 
@@ -49,8 +48,8 @@ public class BookController {
         BookDTO book = bookService.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Kitab tapılmadı!"));
         model.addAttribute("book", book);
-        model.addAttribute("authors", authorService.findAll()); // Mövcud müəlliflər
-        model.addAttribute("categories", categoryService.findAll()); // Mövcud kateqoriyalar
+        model.addAttribute("authors", authorService.findAll());
+        model.addAttribute("categories", categoryService.findAll());
         return "books/edit";
     }
 
@@ -74,4 +73,13 @@ public class BookController {
         model.addAttribute("book", book);
         return "books/view";
     }
+    @GetMapping("/books/{id}")
+    public String getBookDetails(@PathVariable Long id, Model model) {
+        BookDTO book = bookService.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Kitab tapılmadı! ID: " + id));
+        model.addAttribute("book", book);
+        return "website/view";
+    }
+
+
 }

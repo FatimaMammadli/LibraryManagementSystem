@@ -1,9 +1,10 @@
 package com.example.LibraryManagementSystem.mapper;
 
-import com.example.LibraryManagementSystem.DTO.AuthorDTO;
+import com.example.LibraryManagementSystem.dto.AuthorDTO;
 import com.example.LibraryManagementSystem.model.Author;
 import com.example.LibraryManagementSystem.model.Book;
 import org.springframework.stereotype.Component;
+
 import java.util.List;
 import java.util.stream.Collectors;
 

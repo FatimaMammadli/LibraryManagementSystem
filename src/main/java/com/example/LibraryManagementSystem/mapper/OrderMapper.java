@@ -1,6 +1,6 @@
 package com.example.LibraryManagementSystem.mapper;
 
-import com.example.LibraryManagementSystem.DTO.OrderDTO;
+import com.example.LibraryManagementSystem.dto.OrderDTO;
 import com.example.LibraryManagementSystem.model.Book;
 import com.example.LibraryManagementSystem.model.Order;
 import com.example.LibraryManagementSystem.model.Student;

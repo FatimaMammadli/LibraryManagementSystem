@@ -2,21 +2,69 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Sifarişlər</title>
+  <title>🎀 Sifarişlər 🎀</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(to right, #ff9a9e, #fad0c4);
+      font-family: 'Poppins', sans-serif;
+      color: #5a3d5c;
+    }
+    .container {
+      max-width: 900px;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 30px;
+      margin-top: 50px;
+      border-radius: 15px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+    h2 {
+      color: #ff4081;
+      text-shadow: 1px 1px 3px rgba(255, 64, 129, 0.3);
+    }
+    .table {
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .table thead {
+      background-color: #ff4081;
+      color: white;
+    }
+    .table-hover tbody tr:hover {
+      background-color: rgba(255, 182, 193, 0.5);
+      transition: all 0.3s ease-in-out;
+    }
+    .btn-custom {
+      background: #ff4081;
+      color: white;
+      font-weight: bold;
+      border-radius: 20px;
+      transition: all 0.3s ease-in-out;
+    }
+    .btn-custom:hover {
+      background: #d81b60;
+      transform: scale(1.05);
+    }
+    .btn-warning, .btn-danger, .btn-info {
+      border-radius: 20px;
+    }
+    .btn-warning:hover, .btn-danger:hover, .btn-info:hover {
+      transform: scale(1.05);
+    }
+  </style>
 </head>
 <body>
-<div class="container mt-4">
-  <h2 class="text-primary text-center"><i class="fas fa-shopping-cart"></i> Sifarişlər</h2>
+<div class="container">
+  <h2><i class="fas fa-shopping-cart"></i> 🎀 Sifarişlər 🎀</h2>
 
-  <!-- Yeni Sifariş Əlavə Et -->
-  <a href="/dashboard/orders/create" class="btn btn-success mb-3">
+  <a href="/dashboard/orders/create" class="btn btn-custom mb-3">
     <i class="fas fa-plus"></i> Yeni Sifariş
   </a>
 
   <table class="table table-hover table-bordered">
-    <thead class="table-dark">
+    <thead>
     <tr>
       <th>#</th>
       <th>Tələbə</th>

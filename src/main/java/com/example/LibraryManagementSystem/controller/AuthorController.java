@@ -1,11 +1,12 @@
 package com.example.LibraryManagementSystem.controller;
 
-import com.example.LibraryManagementSystem.DTO.AuthorDTO;
+import com.example.LibraryManagementSystem.dto.AuthorDTO;
 import com.example.LibraryManagementSystem.service.AuthorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @Controller

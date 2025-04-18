@@ -1,8 +1,9 @@
 package com.example.LibraryManagementSystem.mapper;
 
-import com.example.LibraryManagementSystem.DTO.CategoryDTO;
+import com.example.LibraryManagementSystem.dto.CategoryDTO;
 import com.example.LibraryManagementSystem.model.Book;
 import com.example.LibraryManagementSystem.model.Category;
+
 import java.util.List;
 import java.util.stream.Collectors;
 

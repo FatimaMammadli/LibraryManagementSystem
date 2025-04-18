@@ -2,20 +2,84 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Müəllifi Redaktə Et</title>
+    <title>💖 Müəllifi Redaktə Et 🎀</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+            font-family: 'Poppins', sans-serif;
+            color: #5a3d5c;
+        }
+        .container {
+            max-width: 500px;
+            margin-top: 50px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 15px rgba(255, 0, 127, 0.2);
+        }
+        h2 {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff1493;
+            text-align: center;
+        }
+        .form-label {
+            font-weight: bold;
+        }
+        .form-control {
+            border-radius: 20px;
+            border: 2px solid #ff85a2;
+            transition: all 0.3s ease-in-out;
+        }
+        .form-control:focus {
+            border-color: #ff1493;
+            box-shadow: 0px 0px 10px rgba(255, 105, 180, 0.5);
+        }
+        .btn-warning {
+            border-radius: 25px;
+            width: 100%;
+            background: #ff69b4;
+            color: white;
+            font-weight: bold;
+            transition: all 0.3s ease-in-out;
+        }
+        .btn-warning:hover {
+            background: #ff1493;
+            transform: scale(1.05);
+        }
+        .btn-secondary {
+            display: block;
+            margin-top: 15px;
+            border-radius: 20px;
+            width: 100%;
+            background: #ffc0cb;
+            color: black;
+            font-weight: bold;
+            transition: all 0.3s ease-in-out;
+        }
+        .btn-secondary:hover {
+            background: #ff85a2;
+            color: white;
+        }
+    </style>
 </head>
 <body>
-<div class="container mt-4">
-    <h2 class="text-warning"><i class="fas fa-edit"></i> Müəllifi Redaktə Et</h2>
+
+<div class="container">
+    <h2><i class="fas fa-edit"></i> 🎀 Müəllifi Redaktə Et 💖</h2>
+
     <form th:action="@{/dashboard/authors/update/{id}(id=${author.id})}" th:object="${author}" method="post">
         <div class="mb-3">
             <label class="form-label">Müəllif Adı:</label>
-            <input type="text" th:field="*{name}" class="form-control" required>
+            <input type="text" th:field="*{name}" class="form-control" required placeholder="Müəllifin adını daxil edin...">
         </div>
         <button type="submit" class="btn btn-warning"><i class="fas fa-save"></i> Yenilə</button>
         <a href="/dashboard/authors" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Geri</a>
     </form>
 </div>
+
 </body>
 </html>

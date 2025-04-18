@@ -1,17 +1,18 @@
 package com.example.LibraryManagementSystem.service;
 
-import ch.qos.logback.core.model.Model;
-import com.example.LibraryManagementSystem.DTO.AuthorDTO;
+import com.example.LibraryManagementSystem.dto.AuthorDTO;
 import com.example.LibraryManagementSystem.mapper.AuthorMapper;
 import com.example.LibraryManagementSystem.model.Author;
-import com.example.LibraryManagementSystem.model.Book;
 import com.example.LibraryManagementSystem.repository.AuthorRepository;
 import com.example.LibraryManagementSystem.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class AuthorService {
@@ -20,6 +21,7 @@ public class AuthorService {
     private final BookRepository bookRepository;
 
     public List<AuthorDTO> findAll() {
+        log.info("Find all Authors");
         return authorRepository.findAll()
                 .stream()
                 .map(AuthorMapper::toDTO)
@@ -27,29 +29,30 @@ public class AuthorService {
     }
 
     public AuthorDTO findById(Long id) {
+        log.info("Find Author by ID {}", id);
         Author author = authorRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Author not found with ID: " + id));
         return AuthorMapper.toDTO(author);
     }
 
     public AuthorDTO save(AuthorDTO authorDTO) {
-//        List<Book> books = bookRepository.findAllById(authorDTO.getBookIds());
+        log.info("Save Author {}", authorDTO);
         Author author = AuthorMapper.toEntity(authorDTO);
         author = authorRepository.save(author);
         return AuthorMapper.toDTO(author);
     }
 
     public void deleteById(Long id) {
+        log.info("Delete Author by ID {}", id);
         authorRepository.deleteById(id);
     }
 
     public AuthorDTO update(Long id, AuthorDTO authorDTO) {
+        log.info("Update Author {}", authorDTO);
         Author existingAuthor = authorRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Author not found with ID: " + id));
 
-//        List<Book> books = bookRepository.findAllById(authorDTO.getBookIds());
         existingAuthor.setName(authorDTO.getName());
-//        existingAuthor.setBooks(books);
 
         return AuthorMapper.toDTO(authorRepository.save(existingAuthor));
     }

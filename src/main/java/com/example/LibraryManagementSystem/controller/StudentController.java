@@ -1,6 +1,8 @@
 package com.example.LibraryManagementSystem.controller;
 
-import com.example.LibraryManagementSystem.DTO.StudentDTO;
+import com.example.LibraryManagementSystem.dto.StudentDTO;
+import com.example.LibraryManagementSystem.model.Order;
+import com.example.LibraryManagementSystem.repository.OrderRepository;
 import com.example.LibraryManagementSystem.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,7 @@ import java.util.List;
 public class StudentController {
 
     private final StudentService studentService;
+    private final OrderRepository orderRepository;
 
     @GetMapping
     public String listStudents(Model model) {
@@ -26,6 +29,7 @@ public class StudentController {
     @GetMapping("/create")
     public String showCreateForm(Model model) {
         model.addAttribute("student", new StudentDTO());
+        model.addAttribute("order", new Order());
         return "students/create";
     }
 
@@ -60,4 +64,13 @@ public class StudentController {
         studentService.delete(id);
         return "redirect:/dashboard/students";
     }
+    @GetMapping("/order/{id}")
+    public String getOrderDetails(@PathVariable Long id, Model model) {
+        Order order = orderRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Sifariş tapılmadı!"));
+
+        model.addAttribute("order", order);
+        return "order/details";
+    }
+
 }

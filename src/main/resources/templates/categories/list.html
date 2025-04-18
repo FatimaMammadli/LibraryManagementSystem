@@ -2,16 +2,65 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Kateqoriyalar</title>
+    <title>🎀 Kateqoriyalar 🎀</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+            font-family: 'Poppins', sans-serif;
+            color: #5a3d5c;
+        }
+        .container {
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            margin-top: 50px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        h2 {
+            color: #ff4081;
+            text-shadow: 1px 1px 3px rgba(255, 64, 129, 0.3);
+            text-align: center;
+        }
+        .btn-custom {
+            background: #ff4081;
+            color: white;
+            font-weight: bold;
+            border-radius: 25px;
+            transition: all 0.3s ease-in-out;
+        }
+        .btn-custom:hover {
+            background: #d81b60;
+            transform: scale(1.05);
+        }
+        .btn-secondary, .btn-success, .btn-info, .btn-warning, .btn-danger {
+            border-radius: 25px;
+            transition: all 0.3s ease-in-out;
+        }
+        .btn-secondary:hover, .btn-success:hover, .btn-info:hover, .btn-warning:hover, .btn-danger:hover {
+            transform: scale(1.05);
+        }
+        .table {
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .table th {
+            background: #ff4081 !important;
+            color: white;
+            text-align: center;
+        }
+        .table td {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-<div class="container mt-4">
-    <h2 class="text-primary text-center"><i class="fas fa-layer-group"></i> Kateqoriyalar</h2>
+<div class="container">
+    <h2><i class="fas fa-layer-group"></i> Kateqoriyalar 🎀</h2>
 
-    <!-- Yeni Kateqoriya Əlavə Et -->
-    <a href="/dashboard/categories/create" class="btn btn-success mb-3">
+    <a href="/dashboard/categories/create" class="btn btn-custom mb-3">
         <i class="fas fa-plus"></i> Yeni Kateqoriya
     </a>
 

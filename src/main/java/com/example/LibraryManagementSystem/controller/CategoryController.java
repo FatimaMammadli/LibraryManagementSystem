@@ -1,6 +1,6 @@
 package com.example.LibraryManagementSystem.controller;
 
-import com.example.LibraryManagementSystem.DTO.CategoryDTO;
+import com.example.LibraryManagementSystem.dto.CategoryDTO;
 import com.example.LibraryManagementSystem.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

@@ -2,21 +2,72 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Tələbələr</title>
+    <title>🎀 Tələbələr 🎀</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+            font-family: 'Poppins', sans-serif;
+            color: #5a3d5c;
+        }
+        .container {
+            max-width: 900px;
+            background: rgba(255, 255, 255, 0.85);
+            padding: 30px;
+            margin-top: 50px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        h2 {
+            color: #ff4081;
+            text-shadow: 1px 1px 3px rgba(255, 64, 129, 0.3);
+        }
+        .btn-custom {
+            border-radius: 25px;
+            background: #ff69b4;
+            color: white;
+            font-weight: bold;
+            transition: all 0.3s ease-in-out;
+        }
+        .btn-custom:hover {
+            background: #ff1493;
+            transform: scale(1.05);
+        }
+        .btn-secondary {
+            border-radius: 25px;
+        }
+        .table {
+            border-radius: 10px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.95);
+        }
+        .table thead {
+            background: #ff69b4;
+            color: white;
+        }
+        .table tbody tr:hover {
+            background: rgba(255, 182, 193, 0.3);
+            transition: 0.3s;
+        }
+        label {
+            font-weight: bold;
+            color: #d63384;
+        }
+    </style>
 </head>
 <body>
-<div class="container mt-4">
-    <h2 class="text-primary text-center"><i class="fas fa-users"></i> Tələbələr</h2>
 
-    <!-- Yeni Tələbə Əlavə Et -->
-    <a href="/dashboard/students/create" class="btn btn-success mb-3">
+<div class="container">
+    <h2><i class="fas fa-users"></i> 🎀 Tələbələr 🎀</h2>
+
+    <a href="/dashboard/students/create" class="btn btn-custom mb-3">
         <i class="fas fa-plus"></i> Yeni Tələbə
     </a>
 
     <table class="table table-hover table-bordered">
-        <thead class="table-dark">
+        <thead>
         <tr>
             <th>#</th>
             <th>Ad</th>
@@ -48,5 +99,6 @@
         </tbody>
     </table>
 </div>
+
 </body>
 </html>

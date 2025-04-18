@@ -2,29 +2,81 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Yeni Sifariş</title>
+  <title>🎀 Yeni Sifariş Əlavə Et 🎀</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(to right, #ff9a9e, #fad0c4);
+      font-family: 'Poppins', sans-serif;
+      color: #5a3d5c;
+    }
+    .container {
+      max-width: 500px;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 30px;
+      margin-top: 50px;
+      border-radius: 15px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+    h2 {
+      color: #ff4081;
+      text-shadow: 1px 1px 3px rgba(255, 64, 129, 0.3);
+    }
+    .form-label {
+      font-weight: bold;
+      color: #ff4081;
+    }
+    .form-select, .btn {
+      border-radius: 25px;
+      transition: all 0.3s ease-in-out;
+    }
+    .form-select {
+      border: 2px solid #ff85a2;
+    }
+    .form-select:focus {
+      border-color: #ff1493;
+      box-shadow: 0px 0px 10px rgba(255, 105, 180, 0.5);
+    }
+    .btn-custom {
+      background: #ff4081;
+      color: white;
+      font-weight: bold;
+    }
+    .btn-custom:hover {
+      background: #d81b60;
+      transform: scale(1.05);
+    }
+    .btn-secondary {
+      border-radius: 25px;
+      transition: all 0.3s ease-in-out;
+    }
+    .btn-secondary:hover {
+      transform: scale(1.05);
+    }
+  </style>
 </head>
 <body>
-<div class="container mt-4">
-  <h2 class="text-success"><i class="fas fa-plus-circle"></i> Yeni Sifariş Əlavə Et</h2>
+<div class="container">
+  <h2><i class="fas fa-plus-circle"></i> Yeni Sifariş Əlavə Et 🎀</h2>
   <form th:action="@{/dashboard/orders/create}" th:object="${order}" method="post">
 
     <div class="mb-3">
-      <label class="form-label">Tələbə:</label>
+      <label class="form-label"><i class="fas fa-user"></i> Tələbə:</label>
       <select class="form-select" th:field="*{studentId}">
         <option th:each="student : ${students}" th:value="${student.id}" th:text="${student.name}"></option>
       </select>
     </div>
 
     <div class="mb-3">
-      <label class="form-label">Kitab:</label>
+      <label class="form-label"><i class="fas fa-book"></i> Kitab:</label>
       <select class="form-select" th:field="*{bookId}">
         <option th:each="book : ${books}" th:value="${book.id}" th:text="${book.name}"></option>
       </select>
     </div>
 
-    <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Yadda Saxla</button>
+    <button type="submit" class="btn btn-custom"><i class="fas fa-save"></i> Yadda Saxla</button>
     <a href="/dashboard/orders" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Geri</a>
   </form>
 </div>

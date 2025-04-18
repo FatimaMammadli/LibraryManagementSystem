@@ -1,21 +1,25 @@
 package com.example.LibraryManagementSystem.mapper;
 
-import com.example.LibraryManagementSystem.DTO.BookDTO;
+import com.example.LibraryManagementSystem.dto.BookDTO;
 import com.example.LibraryManagementSystem.model.Author;
 import com.example.LibraryManagementSystem.model.Book;
 import com.example.LibraryManagementSystem.model.Category;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class BookMapper {
 
-    // Entity -> DTO
     public static BookDTO toDTO(Book book) {
         if (book == null) {
             return null;
         }
+
         List<Long> authorIds = book.getAuthors() != null ?
                 book.getAuthors().stream().map(Author::getId).collect(Collectors.toList()) : null;
+
+        List<String> authorNames = book.getAuthors() != null ?
+                book.getAuthors().stream().map(Author::getName).collect(Collectors.toList()) : null;
 
         return new BookDTO(
                 book.getId(),
@@ -26,11 +30,12 @@ public class BookMapper {
                 book.getPublisher(),
                 book.getPublishedYear(),
                 book.getQuantity(),
-                book.getCategory() != null ? book.getCategory().getId() : null
+                book.getCategory() != null ? book.getCategory().getId() : null,
+                authorNames
         );
     }
 
-    // DTO -> Entity
+
     public static Book toEntity(BookDTO bookDTO, Category category, List<Author> authors) {
         if (bookDTO == null) {
             return null;
@@ -45,6 +50,8 @@ public class BookMapper {
         book.setPublishedYear(bookDTO.getPublishedYear());
         book.setQuantity(bookDTO.getQuantity());
         book.setCategory(category);
+        book.setAuthors(authors);
         return book;
     }
 }
+
