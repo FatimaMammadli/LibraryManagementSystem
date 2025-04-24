@@ -15,5 +15,6 @@ public class AuthorDTO {
     private List<Long> bookIds;
 
 
-
+    public AuthorDTO(long l, String newAuthor) {
+    }
 }

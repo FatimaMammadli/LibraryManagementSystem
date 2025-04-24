@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 @Component
 public class AuthorMapper {
 
-        public static AuthorDTO toDTO(Author author) {
+        public  AuthorDTO toDTO(Author author) {
             if (author == null) {
                 return null;
             }
@@ -21,7 +21,7 @@ public class AuthorMapper {
             return new AuthorDTO(author.getId(), author.getName(), bookIds);
         }
 
-        public static Author toEntity(AuthorDTO authorDTO) {
+        public  Author toEntity(AuthorDTO authorDTO) {
             if (authorDTO == null) {
                 return null;
             }

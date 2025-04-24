@@ -19,12 +19,13 @@ public class AuthorService {
 
     private final AuthorRepository authorRepository;
     private final BookRepository bookRepository;
+    private final AuthorMapper authorMapper;
 
     public List<AuthorDTO> findAll() {
         log.info("Find all Authors");
         return authorRepository.findAll()
                 .stream()
-                .map(AuthorMapper::toDTO)
+                .map(authorMapper::toDTO)
                 .collect(Collectors.toList());
     }
 
@@ -32,14 +33,14 @@ public class AuthorService {
         log.info("Find Author by ID {}", id);
         Author author = authorRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Author not found with ID: " + id));
-        return AuthorMapper.toDTO(author);
+        return authorMapper.toDTO(author);
     }
 
     public AuthorDTO save(AuthorDTO authorDTO) {
         log.info("Save Author {}", authorDTO);
-        Author author = AuthorMapper.toEntity(authorDTO);
+        Author author = authorMapper.toEntity(authorDTO);
         author = authorRepository.save(author);
-        return AuthorMapper.toDTO(author);
+        return authorMapper.toDTO(author);
     }
 
     public void deleteById(Long id) {
@@ -54,6 +55,6 @@ public class AuthorService {
 
         existingAuthor.setName(authorDTO.getName());
 
-        return AuthorMapper.toDTO(authorRepository.save(existingAuthor));
+        return authorMapper.toDTO(authorRepository.save(existingAuthor));
     }
 }

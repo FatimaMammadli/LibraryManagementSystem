@@ -27,4 +27,11 @@ public class Book {
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
+
+    public Book(long l, String newBook) {
+    }
+
+    public Book() {
+
+    }
 }
